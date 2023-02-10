@@ -13,13 +13,27 @@ body {
 
 .formInputs{
 	width: 100%;
-    float: left;
     display: flex;
-    margin: 20px;
+    margin: auto;
+    justify-content: start;
+    height: auto;
+    padding: 1%;
 }
 
 .formInputs label{
 	width: 45%;
     display: inline-flex;
     justify-content: center;
+}
+
+.w12MForm{
+	display: flex;
+    flex-wrap: wrap;
+}
+
+.w12MForm button{
+	display: inline-flex;
+    justify-content: center;
+    text-align: center;
+    margin: auto;
 }

@@ -1,27 +1,30 @@
-import { useState } from 'react';
+import { useState } from "react";
 import TextInput from "./TextInput";
-import W12MHeader from './W12MHeader';
+import W12MHeader from "./W12MHeader";
+import Button from "./Button";
 
 const W12MForm = () => {
-	type formData = {
-		speciesName : string;
-		planetName: string;
-		numberOfBeings: string;
-		whatIs: string;
-		reasonForSparing: string; 
-	} 
-	const formDataObj = {
+  type formData = {
+    speciesName: string;
+    planetName: string;
+    numberOfBeings: string;
+    whatIs: string;
+    reasonForSparing: string;
+  };
+
+  const [inputData, setInputData] = useState<formData>({
     speciesName: "humans",
     planetName: "earth",
     numberOfBeings: "1",
     whatIs: " ",
     reasonForSparing: "",
-  };
-	const [inputData, setInputData] = useState<formData>({...formDataObj});
-	
-	
+  });
 
-	return (
+  const submitForm = () => {
+    console.log(inputData);
+  };
+
+  return (
     <section className="w12MForm">
       <W12MHeader />
       <TextInput
@@ -30,8 +33,9 @@ const W12MForm = () => {
         inputType="text"
         inputValue={inputData.speciesName}
         onChangeEvent={(e) => {
-          formDataObj.speciesName = e.target.value;
-          setInputData(formDataObj);
+          const newFormData = { ...inputData };
+          newFormData.speciesName = e.target.value;
+          setInputData(newFormData);
         }}
       />
       <TextInput
@@ -40,8 +44,9 @@ const W12MForm = () => {
         inputType="text"
         inputValue={inputData.planetName}
         onChangeEvent={(e) => {
-          formDataObj.planetName = e.target.value;
-          setInputData(formDataObj);
+          const newFormData = { ...inputData };
+          newFormData.planetName = e.target.value;
+          setInputData(newFormData);
         }}
       />
       <TextInput
@@ -50,8 +55,9 @@ const W12MForm = () => {
         inputType="text"
         inputValue={inputData.numberOfBeings}
         onChangeEvent={(e) => {
-          formDataObj.numberOfBeings = e.target.value;
-          setInputData(formDataObj);
+          const newFormData = { ...inputData };
+          newFormData.numberOfBeings = e.target.value;
+          setInputData(newFormData);
         }}
       />
       <TextInput
@@ -60,8 +66,9 @@ const W12MForm = () => {
         inputType="select"
         inputValue={inputData.whatIs}
         onChangeEvent={(e) => {
-          formDataObj.whatIs = e.target.value;
-          setInputData(formDataObj);
+          const newFormData = { ...inputData };
+          newFormData.whatIs = e.target.value;
+          setInputData(newFormData);
         }}
       />
       <TextInput
@@ -70,10 +77,12 @@ const W12MForm = () => {
         inputType="textarea"
         inputValue={inputData.reasonForSparing}
         onChangeEvent={(e) => {
-          formDataObj.reasonForSparing = e.target.value;
-          setInputData(formDataObj);
+          const newFormData = { ...inputData };
+          newFormData.reasonForSparing = e.target.value;
+          setInputData(newFormData);
         }}
       />
+      <Button onClickHandler={submitForm}></Button>
     </section>
   );
 };
