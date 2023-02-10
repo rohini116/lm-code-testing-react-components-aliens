@@ -1,25 +1,79 @@
 import { useState } from 'react';
-import NumberOfBeings from './NumberOfBeings';
-import PlanetName from './PlanetName';
-import SpeciesName from './SpeciesName';
+import TextInput from "./TextInput";
 import W12MHeader from './W12MHeader';
 
 const W12MForm = () => {
-	const [speciesName, setSpeciesName] = useState<string>("humans");
-	const [planetName, setPlanetName] = useState<string>("earth");
-	const [numberOfBeings, setNumberOfBeings] = useState<number>(1)
+	type formData = {
+		speciesName : string;
+		planetName: string;
+		numberOfBeings: string;
+		whatIs: string;
+		reasonForSparing: string; 
+	} 
+	const formDataObj = {
+    speciesName: "humans",
+    planetName: "earth",
+    numberOfBeings: "1",
+    whatIs: " ",
+    reasonForSparing: "",
+  };
+	const [inputData, setInputData] = useState<formData>({...formDataObj});
+	
+	
+
 	return (
     <section className="w12MForm">
       <W12MHeader />
-      <SpeciesName
-        speciesName={speciesName}
-        onChangeSpeciesName={(e: any) => setSpeciesName(e.target.value)}
+      <TextInput
+        inputText="speciesName"
+        displayText="Species Name"
+        inputType="text"
+        inputValue={inputData.speciesName}
+        onChangeEvent={(e) => {
+          formDataObj.speciesName = e.target.value;
+          setInputData(formDataObj);
+        }}
       />
-      <PlanetName
-        planetName={planetName}
-        onChangePlanetName={(e: any) => setPlanetName(e.target.value)}
+      <TextInput
+        inputText="planetName"
+        displayText="Planet Name"
+        inputType="text"
+        inputValue={inputData.planetName}
+        onChangeEvent={(e) => {
+          formDataObj.planetName = e.target.value;
+          setInputData(formDataObj);
+        }}
       />
-	  <NumberOfBeings numberOfBeings={numberOfBeings} onChangeNumberOfBeings={(e: any) => setNumberOfBeings(e.target.value)}></NumberOfBeings>
+      <TextInput
+        inputText="numberOfBeings"
+        displayText="Number of Beings"
+        inputType="text"
+        inputValue={inputData.numberOfBeings}
+        onChangeEvent={(e) => {
+          formDataObj.numberOfBeings = e.target.value;
+          setInputData(formDataObj);
+        }}
+      />
+      <TextInput
+        inputText="whatIs"
+        displayText="What is 2 + 2?"
+        inputType="select"
+        inputValue={inputData.whatIs}
+        onChangeEvent={(e) => {
+          formDataObj.whatIs = e.target.value;
+          setInputData(formDataObj);
+        }}
+      />
+      <TextInput
+        inputText="reasonForSparing"
+        displayText="Reason for Sparing"
+        inputType="textarea"
+        inputValue={inputData.reasonForSparing}
+        onChangeEvent={(e) => {
+          formDataObj.reasonForSparing = e.target.value;
+          setInputData(formDataObj);
+        }}
+      />
     </section>
   );
 };
