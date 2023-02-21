@@ -2,20 +2,21 @@ import { useState } from "react";
 import TextInput from "./TextInput";
 import W12MHeader from "./W12MHeader";
 import Button from "./Button";
+import SelectInput from "./SelectInput";
 
 const W12MForm = () => {
-  type formData = {
+  type FormData = {
     speciesName: string;
     planetName: string;
-    numberOfBeings: string;
+    numberOfBeings: number;
     whatIs: string;
     reasonForSparing: string;
   };
 
-  const [inputData, setInputData] = useState<formData>({
+  const [inputData, setInputData] = useState<FormData>({
     speciesName: "humans",
     planetName: "earth",
-    numberOfBeings: "1",
+    numberOfBeings: 1,
     whatIs: " ",
     reasonForSparing: "",
   });
@@ -52,15 +53,15 @@ const W12MForm = () => {
       <TextInput
         inputText="numberOfBeings"
         displayText="Number of Beings"
-        inputType="text"
+        inputType="number"
         inputValue={inputData.numberOfBeings}
         onChangeEvent={(e) => {
           const newFormData = { ...inputData };
-          newFormData.numberOfBeings = e.target.value;
+          newFormData.numberOfBeings = parseInt(e.target.value);
           setInputData(newFormData);
         }}
       />
-      <TextInput
+      <SelectInput
         inputText="whatIs"
         displayText="What is 2 + 2?"
         inputType="select"
