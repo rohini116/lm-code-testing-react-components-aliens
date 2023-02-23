@@ -1,11 +1,12 @@
 import { HtmlHTMLAttributes, useState } from "react";
 import ErrorMessage from "./ErrorMessage";
 
-interface TextInputProps { 
+export interface TextInputProps { 
   inputText: string;
   inputType: string;
   displayText: string;
 	inputValue: string | number;
+  placeHolder?: string;
 	onChangeEvent: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
 }
 
@@ -15,10 +16,11 @@ const TextInput: React.FC<TextInputProps> = (props) => {
   const validate: (target:HTMLInputElement | HTMLTextAreaElement) => string = (target) => {
     let err = " ";
     switch (target.id) {
-      case "speciesName":
+        case "speciesName":
+          err = "Error!";
         if(target.value.match(/^[A-Za-z]+$/) === null)
         {
-          err = "Please enter alphabet characters";
+          err += "Please enter alphabet characters";
         }
         else if (
           target.value.match(/^[A-Za-z]+$/) !== null &&
@@ -28,28 +30,30 @@ const TextInput: React.FC<TextInputProps> = (props) => {
         } 
         break;
       case "planetName":
+        err = "Error!";
         if(target.value.match(/^[A-Za-z0-9]*$/) === null)
         {
-          err = "Please enter only alphabet characters and numbers";
+          err += "Please enter only alphabet characters and numbers";
         }
         else if (
           target.value.match(/^[A-Za-z0-9]*$/) !== null &&
           (target.value.length < 2 || target.value.length > 49)
         ) {
-          err = "Input length must be between 2 to 49 characters";
+          err += "Input length must be between 2 to 49 characters";
         }
         break;
       case "numberOfBeings":
+       
         if (
           parseInt(target.value) === 0 ||
           parseInt(target.value) > 1000000000
         ) {
-          err = "Please enter valid number";
+          err = "Error! Please enter valid number";
         } 
         break;
       case "reasonForSparing":
         if (target.value.length < 17 || target.value.length > 153) {
-          err = "Entered text must be between 17 to 153 characters";
+          err = "Error! Entered text must be between 17 to 153 characters";
         } 
         break;
       default:
@@ -78,6 +82,7 @@ const TextInput: React.FC<TextInputProps> = (props) => {
           id={props.inputText}
           type={props.inputType}
           value={props.inputValue}
+          placeholder={props.placeHolder}
           onChange={(e) => {const errorMessage = validate(e.target); 
             setErrorMessage(errorMessage);
             props.onChangeEvent(e)}}

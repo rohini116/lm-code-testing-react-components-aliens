@@ -14,9 +14,9 @@ const W12MForm = () => {
   };
 
   const [inputData, setInputData] = useState<FormData>({
-    speciesName: "humans",
-    planetName: "earth",
-    numberOfBeings: 1,
+    speciesName: "",
+    planetName: "",
+    numberOfBeings: 0,
     whatIs: " ",
     reasonForSparing: "",
   });
@@ -33,6 +33,7 @@ const W12MForm = () => {
         displayText="Species Name"
         inputType="text"
         inputValue={inputData.speciesName}
+        placeHolder="Enter Species Name"
         onChangeEvent={(e) => {
           const newFormData = { ...inputData };
           newFormData.speciesName = e.target.value;
@@ -44,6 +45,7 @@ const W12MForm = () => {
         displayText="Planet Name"
         inputType="text"
         inputValue={inputData.planetName}
+        placeHolder="Enter Planet Name"
         onChangeEvent={(e) => {
           const newFormData = { ...inputData };
           newFormData.planetName = e.target.value;
